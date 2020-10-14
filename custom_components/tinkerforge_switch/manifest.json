@@ -1,0 +1,10 @@
+{
+  "domain": "tinkerforge",
+  "name": "Tinkerforge Remote Switch",
+  "documentation": "https://github.com/BenPru/ha_tinkerforge_remote_switch",
+  "dependencies": [],
+  "after_dependencies": ["http"],
+  "codeowners": ["@BenPru"],
+  "requirements": ["tinkerforge>=2.1.26"],
+  "config_flow": false
+}
