@@ -1,10 +1,10 @@
 # Tinkerforge remote switch
 This component has been created to be used with Home Assistant
 
-The `Tinkerforge remote switch` integration lets you integrate the tinkerforge zero brick with a `Remote Switch Bricklet 2.0` into home assistant.
+The `Tinkerforge remote switch` integration lets you integrate the tinkerforge zero brick with a [Remote Switch Bricklet 2.0](https://www.tinkerforge.com/de/doc/Hardware/Bricklets/Remote_Switch_V2.html) into home assistant.
 You can switch 433 Mhz plug sockets with home assistant and you can also react on the remote control keys.
 
-You have to install the tinkerforce brick daemon.
+You have to install the [tinkerforge brick daemon](https://www.tinkerforge.com/de/doc/Software/Brickd.html).
 
 ## Configuration
 
