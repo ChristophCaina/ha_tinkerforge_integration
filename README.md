@@ -5,7 +5,7 @@ The `Tinkerforge remote switch` integration lets you integrate the tinkerforge [
 You can switch 433 Mhz plug sockets with home assistant and you can also react on the remote control keys.
 
 You have to install the [Tinkerforge Brick Daemon](https://www.tinkerforge.com/en/doc/Software/Brickd.html).
-Use the (Brick Viewer](https://www.tinkerforge.com/en/doc/Software/Brickv.html) to detect the uid, remote type and so on.
+Use the [Brick Viewer](https://www.tinkerforge.com/en/doc/Software/Brickv.html) to detect the uid, remote type and so on.
 
 ## Configuration
 
