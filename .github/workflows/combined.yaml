@@ -24,7 +24,7 @@ jobs:
         with:
           CATEGORY: integration
           ignore: brands,wheels
-      - uses: KTibow/ha-blueprint@stable
+      - uses: KTibow/ha-blueprint@main
         name: CI
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
