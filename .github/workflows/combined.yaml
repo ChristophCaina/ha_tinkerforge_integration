@@ -28,4 +28,5 @@ jobs:
         name: CI
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        env:
           HASSFEST: DISABLED
