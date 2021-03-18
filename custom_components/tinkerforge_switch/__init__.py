@@ -86,17 +86,10 @@ def setup(hass, config):
     hass.data[DOMAIN + '_remote_type'] = remote_type
 
     def cb_remote_status(house_code, receiver_code, switch_to, repeats):
-        _LOGGER.debug(
-            "Callback: "
-            + str(house_code)
-            + " - "
-            + str(receiver_code)
-            + " - "
-            + str(switch_to)
-        )
-        switch = hass.data.get(
-            DOMAIN + "_" + str(house_code) + "_" + str(receiver_code)
-        )
+        _LOGGER.debug('Callback: {} - {} - {}'
+                      .format(house_code, receiver_code, switch_to))
+        switch = hass.data.get('{}_{}_{}'
+                               .format(DOMAIN, house_code, receiver_code))
         if not switch:
             return
         switch.set_switch_state(switch_to)

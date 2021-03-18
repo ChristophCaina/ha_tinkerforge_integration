@@ -1,5 +1,7 @@
 """Platform for tinkerforge remote switch integration."""
 import logging
+from random import randint
+from time import sleep
 from typing import Callable, Optional, Sequence
 
 import homeassistant.helpers.config_validation as cv
@@ -7,26 +9,18 @@ import voluptuous as vol
 
 # Import the device class from the component that you want to support
 from homeassistant.components.switch import PLATFORM_SCHEMA, SwitchEntity
-from homeassistant.const import (
-    CONF_FRIENDLY_NAME,
-    CONF_ICON,
-    CONF_ID,
-    CONF_SWITCHES,
-    DEVICE_CLASS_POWER,
-)
+from homeassistant.const import (CONF_FRIENDLY_NAME, CONF_ICON, CONF_ID,
+                                 CONF_SWITCHES, DEVICE_CLASS_POWER)
 from homeassistant.helpers.entity import Entity
-from homeassistant.helpers.typing import (
-    ConfigType,
-    DiscoveryInfoType,
-    HomeAssistantType,
-)
+from homeassistant.helpers.typing import (ConfigType, DiscoveryInfoType,
+                                          HomeAssistantType)
 from homeassistant.util import slugify
 from tinkerforge.bricklet_remote_switch_v2 import BrickletRemoteSwitchV2
 
 from . import DOMAIN, ENTITY_ID_FORMAT
 
-CONF_HOUSE_CODE = "house_code"
-CONF_RECEIVER_CODE = "receiver_code"
+CONF_HOUSE_CODE = 'house_code'
+CONF_RECEIVER_CODE = 'receiver_code'
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -58,7 +52,7 @@ async def async_setup_platform(
     """Set up the switch platform."""
     # Assign configuration variables.
     # The configuration check takes care they are present.
-    rs = hass.data.get(DOMAIN + "_rs")
+    rs = hass.data.get(DOMAIN + '_rs')
     if not rs:
         return False
 
@@ -69,19 +63,13 @@ async def async_setup_platform(
         switch = RemoteSwitch(
             switch_cfg[CONF_ID],
             rs,
-            hass.data[DOMAIN + "_remote_type"],
+                hass.data[DOMAIN + '_remote_type'],
             switch_cfg.get(CONF_HOUSE_CODE),
             switch_cfg.get(CONF_RECEIVER_CODE),
             switch_cfg.get(CONF_FRIENDLY_NAME),
-            switch_cfg.get(CONF_ICON),
-        )
-        hass.data[
-            DOMAIN
-            + "_"
-            + str(switch_cfg.get(CONF_HOUSE_CODE))
-            + "_"
-            + str(switch_cfg.get(CONF_RECEIVER_CODE))
-        ] = switch
+                switch_cfg.get(CONF_ICON))
+        hass.data['{}_{}_{}'
+                  .format(DOMAIN, switch_cfg.get(CONF_HOUSE_CODE), switch_cfg.get(CONF_RECEIVER_CODE))] = switch
         entities.append(switch)
 
     add_entities(entities, True)
@@ -144,14 +132,23 @@ class RemoteSwitch(SwitchEntity):
         self.__switch(BrickletRemoteSwitchV2.SWITCH_TO_OFF)
 
     def __switch(self, switch_to):
-        _LOGGER.debug("Switch: " + str(switch_to))
-        if self._remote_type == BrickletRemoteSwitchV2.REMOTE_TYPE_A:
-            self._rs.switch_socket_a(self._house_code, self._receiver_code, switch_to)
-        elif self._remote_type == BrickletRemoteSwitchV2.REMOTE_TYPE_B:
-            self._rs.switch_socket_b(self._house_code, self._receiver_code, switch_to)
-        elif self._remote_type == BrickletRemoteSwitchV2.REMOTE_TYPE_C:
-            self._rs.switch_socket_b(self._house_code, self._receiver_code, switch_to)
+        _LOGGER.debug('Switch: ' + str(switch_to))
+        self.__switch_intern(switch_to)
         self.set_switch_state(switch_to)
+        sleep(randint(10, 2000) / 100)
+        self.__switch_intern(switch_to)
+        sleep(randint(10, 2000) / 100)
+        self.__switch_intern(switch_to)
+    def __switch_intern(self, switch_to):
+        if (self._remote_type == BrickletRemoteSwitchV2.REMOTE_TYPE_A):
+            self._rs.switch_socket_a(
+                self._house_code, self._receiver_code, switch_to)
+        elif (self._remote_type == BrickletRemoteSwitchV2.REMOTE_TYPE_B):
+            self._rs.switch_socket_b(
+                self._house_code, self._receiver_code, switch_to)
+        elif (self._remote_type == BrickletRemoteSwitchV2.REMOTE_TYPE_C):
+            self._rs.switch_socket_c(
+                self._house_code, self._receiver_code, switch_to)
 
     def set_switch_state(self, switched_to):
         self._state = switched_to == BrickletRemoteSwitchV2.SWITCH_TO_ON

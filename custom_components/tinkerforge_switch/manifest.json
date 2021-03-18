@@ -1,6 +1,7 @@
 {
   "domain": "tinkerforge",
   "name": "Tinkerforge Remote Switch",
+  "version": "2021.03.18",
   "documentation": "https://github.com/BenPru/ha_tinkerforge_remote_switch",
   "issue_tracker": "https://github.com/BenPru/ha_tinkerforge_remote_switch/issues",
   "dependencies": [],
