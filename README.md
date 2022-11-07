@@ -1,13 +1,20 @@
-# Tinkerforge remote switch
+# Work in Progress!
+
+## Tinkerforge integration
 This component has been created to be used with Home Assistant
 
-The `Tinkerforge remote switch` integration lets you integrate the tinkerforge [HAT Brick](https://www.tinkerforge.com/en/doc/Hardware/Bricks/HAT_Brick.html) or [HAT Zero Brick](https://www.tinkerforge.com/en/doc/Hardware/Bricks/HAT_Zero_Brick.html) with a [Remote Switch Bricklet 2.0](https://www.tinkerforge.com/en/doc/Hardware/Bricklets/Remote_Switch_V2.html) into home assistant.
+it is based on the work of [BenPru/ha_tinkerforge_remote_switch](https://github.com/BenPru/ha_tinkerforge_remote_switch)
+but tries to extend the functionallity to other bricks and bricklets from Tinkerforge.
+
+The `Tinkerforge` integration lets you integrate the tinkerforge [HAT Brick](https://www.tinkerforge.com/en/doc/Hardware/Bricks/HAT_Brick.html) or [HAT Zero Brick](https://www.tinkerforge.com/en/doc/Hardware/Bricks/HAT_Zero_Brick.html) with a [Remote Switch Bricklet 2.0](https://www.tinkerforge.com/en/doc/Hardware/Bricklets/Remote_Switch_V2.html) into home assistant.
 You can switch 433 Mhz plug sockets with home assistant and you can also react on the remote control keys.
 
 You have to install the [Tinkerforge Brick Daemon](https://www.tinkerforge.com/en/doc/Software/Brickd.html).
 Use the [Brick Viewer](https://www.tinkerforge.com/en/doc/Software/Brickv.html) to detect the uid, remote type and so on.
 
-## Configuration
+## original documentation below... - needs to be changed
+
+### Configuration
 
 To enable this component, add the following lines to your `configuration.yaml` file:
 
